@@ -4,8 +4,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 def init_browser():
     # Setup Splinter
-    executable_path = {'executable path': ChromeDriverManager().install()}
-    return Browser("chrome",executable_path= ChromeDriverManager().install, headless = False)
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    return Browser("chrome", **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
