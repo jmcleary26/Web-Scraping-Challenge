@@ -1,6 +1,8 @@
 from splinter import Browser
 from bs4 import BeautifulSoup as bs
 from webdriver_manager.chrome import ChromeDriverManager
+import pandas as pd
+import time
 
 def init_browser():
     # Setup Splinter
@@ -13,10 +15,12 @@ def scrape():
     # Mars Latest News
     url = 'https://mars.nasa.gov/news/'
     browser.visit(url)
+    time.sleep(5)
     browser.html
     soup = bs(browser.html, 'html.parser')
     article_title = soup.find_all('div', class_='bottom_gradient')[0].find('h3').text
     paragraph_text = soup.find_all('div', class_='image_and_description_container')[0].find('div', class_="article_teaser_body").text
+    print(paragraph_text)
 
 
     # Mars featured image
@@ -26,6 +30,7 @@ def scrape():
     soup = bs(browser.html, 'html.parser')
 
     find_image = soup.find('img', class_='headerimage fade-in')["src"]
+    url = url.replace('index.html', '')
     featured_image_url = url + find_image
 
     # Mars Facts
@@ -45,7 +50,6 @@ def scrape():
     browser.html
     soup = bs(browser.html, 'html.parser')
     
-    # main_page = soup.find('div', class_='collapsible results')
     main_page_items = soup.find_all('div', class_ = 'item')
     image_urls = []
     for item in main_page_items:
@@ -53,13 +57,13 @@ def scrape():
         hemisphere_page = item.find('div', class_='description').a['href']
         browser.visit(base_url + hemisphere_page)
         soup = bs(browser.html, 'html.parser')
-    #     print(base_url + hemisphere_page)
+
         hemisphere_link = soup.find('div', class_='downloads')
         hemisphere_url = hemisphere_link.find('li').a["href"]
         
         images_dict = {}
         images_dict['Title'] = hemisphere_titles
-        images_dict['Image Link'] = hemisphere_url
+        images_dict['image_url'] = hemisphere_url
         
         image_urls.append(images_dict)
 
@@ -71,7 +75,7 @@ def scrape():
         "hemispheres": image_urls
 
     }
-
+    print(mars_dict)
     return mars_dict
 
 
