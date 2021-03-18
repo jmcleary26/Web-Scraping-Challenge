@@ -18,7 +18,7 @@
         <!-- Add a button to activate scraping script -->
         <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
       </div>
-      <!-- Add section for Mars News -->
+      <!-- Section for Mars News -->
       <div class="row" id="mars-news">
         <div class="col-md-12">
           <div class="media">
@@ -34,7 +34,7 @@
       <div class="row" id="mars-featured-image">
         <div class="col-md-8">
           <h2>Featured Mars Image</h2>
-          <!-- if images is False/None/non-existent, then default to error message -->
+         
           <img
             src="{{mars.featured_image }}"
             class="img-responsive"
@@ -54,12 +54,12 @@
         <div class="page-header">
           <h2 class="text-center">Mars Hemispheres</h2>
         </div>
-        {% for hemisphere in mars.hemispheres %}
+        {% for item in mars.hemispheres %}
         <div class="col-md-3">
           <div class="thumbnail">
-            <img src="{{hemisphere.img_url | default('static/images/error.png', true)}}" alt="...">
+            <img src="{{ item.hemisphere_url }}>
             <div class="caption">
-              <h3>{{hemisphere.title}}</h3>
+              <h3>{{item.hemisphere_titles}}</h3>
             </div>
           </div>
         </div>
