@@ -1,1 +1,7 @@
 # Web-Scraping-Challenge
+
+In this Web scraping challenge, we were tasked with using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter to scrape certain parts of a website and collect the data and then use MongoDB with Flask Templating to create a new HTML page that displays all of the scraped information. 
+
+In step 1, we scraped the NASA Mars News Site and collected the latest news title and paragraph text and then used Splinter to navigate the JPL Featured Space image site and found the url for the featured Mars image. We then visited the Mars facts webpage and used Pandas to scrape the table containing facts about the planet including diameter and mass and used Pandas to convert the data to a HTML table string. We then visited the USGS Astrogeology site to obtain high resolution images for each of Mar's hemispheres and hemisphere titles containing the hemisphere name and saved the data into a list of dictionaries. 
+
+In step 2, we converted our Jupyter notebook into a pthyon script and used the scrape function to execute all scraping code to return one python dictionary containing all of the scraped data. After creating a route called /scrape, we stored the return value in Mongo as a python dictionary. Finally, we created another root route that queried the Mongo database and passed the mars data into an HTML template to display the data. The final step was creating a template HTML file called index.html to display the data with the appropriate HTML elements.
